@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, EntryGenerator } from './$types';
 import { error } from '@sveltejs/kit';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -14,6 +14,14 @@ import rehypeCodeHighlight from '$lib/rehype-code-highlight.js';
 
 // 링크 메타데이터 캐시
 const metadataCache = new Map<string, any>();
+
+const modules = import.meta.glob('../../../content/**/*.md', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>;
+
+export const entries: EntryGenerator = () => {
+	return Object.keys(modules).map(path => ({
+		slug: path.split('/').pop()?.replace('.md', '') || ''
+	}));
+};
 
 async function fetchLinkMetadata(url: string) {
 	if (metadataCache.has(url)) {
@@ -46,8 +54,6 @@ async function fetchLinkMetadata(url: string) {
 		return { title: '', description: '', image: '', favicon: '' };
 	}
 }
-
-const modules = import.meta.glob('../../../content/**/*.md', { query: '?raw', import: 'default' }) as Record<string, () => Promise<string>>;
 
 export const load: PageServerLoad = async ({ params }) => {
 	const { slug } = params;

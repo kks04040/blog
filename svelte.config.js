@@ -10,6 +10,10 @@ const config = {
 		}),
 		paths: {
 			base: process.env.BASE_PATH || ''
+		},
+		prerender: {
+			entries: ['/', '/posts/hello-world', '/posts/second-post', '/posts/markdown-syntax-guide', '/posts/increasing-token-efficiency'],
+			handleHttpError: 'warn'
 		}
 	}
 };
