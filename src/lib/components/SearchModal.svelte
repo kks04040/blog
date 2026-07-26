@@ -1,12 +1,12 @@
-/**
- * 검색 모달 컴포넌트
- * 
- * Fuse.js를 사용하여 게시글을 검색합니다.
- * 제목, 설명, 본문 내용을 모두 검색합니다.
- * 단축키: Cmd/Ctrl + K
- */
-
 <script lang="ts">
+	/**
+	 * 검색 모달 컴포넌트
+	 * 
+	 * Fuse.js를 사용하여 게시글을 검색합니다.
+	 * 제목, 설명, 본문 내용을 모두 검색합니다.
+	 * 단축키: Cmd/Ctrl + K
+	 */
+
 	import { onMount, onDestroy } from 'svelte';
 	import Fuse from 'fuse.js';
 	import { goto } from '$app/navigation';

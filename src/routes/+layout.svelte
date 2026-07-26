@@ -1,11 +1,11 @@
-/**
- * 글로벌 레이아웃 컴포넌트
- * 
- * 모든 페이지에 공통으로 적용되는 레이아웃을 정의합니다.
- * 헤더, 푸터, 검색 모달, 다크 모드 토글을 포함합니다.
- */
-
 <script lang="ts">
+	/**
+	 * 글로벌 레이아웃 컴포넌트
+	 * 
+	 * 모든 페이지에 공통으로 적용되는 레이아웃을 정의합니다.
+	 * 헤더, 푸터, 검색 모달, 다크 모드 토글을 포함합니다.
+	 */
+
 	import '../app.css';
 	import SearchModal from '$lib/components/SearchModal.svelte';
 	import { page } from '$app/stores';
