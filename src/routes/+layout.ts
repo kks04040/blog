@@ -1,5 +1,7 @@
 import type { LayoutLoad } from './$types';
 
+export const prerender = true;
+
 const modules = import.meta.glob('../content/**/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
 
 export const load: LayoutLoad = async () => {
