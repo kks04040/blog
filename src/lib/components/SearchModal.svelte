@@ -30,8 +30,10 @@
 	onMount(() => {
 		fuse = new Fuse(posts, {
 			keys: ['title', 'description', 'content'],
-			threshold: 0.3,
-			includeScore: true
+			threshold: 0.4,
+			ignoreLocation: true,
+			includeScore: true,
+			minMatchCharLength: 2
 		});
 
 		const handleKeyDown = (e: KeyboardEvent) => {
