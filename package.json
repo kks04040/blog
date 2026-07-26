@@ -1,0 +1,37 @@
+{
+  "name": "personal-blog",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.8",
+    "@sveltejs/kit": "^2.15.2",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "glob": "^11.0.1",
+    "gray-matter": "^4.0.3",
+    "mdsvex": "^0.12.3",
+    "rehype-pretty-code": "^0.14.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.1",
+    "shiki": "^1.29.2",
+    "svelte": "^5.16.5",
+    "unified": "^11.0.5",
+    "vite": "^6.0.7"
+  },
+  "dependencies": {
+    "fuse.js": "^7.5.0",
+    "hastscript": "^9.0.1",
+    "rehype-katex": "^7.0.1",
+    "rehype-raw": "^7.0.0",
+    "remark-footnotes": "^4.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "unist-util-visit": "^5.1.0"
+  }
+}
