@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Post } from '$lib/types';
+	import { base } from '$app/paths';
 
 	export let data: { posts: Post[] };
 </script>
@@ -16,7 +17,7 @@
 		{#each data.posts as post}
 			<article class="post-item">
 				<h2 class="post-title">
-					<a href="/posts/{post.slug}">{post.title}</a>
+					<a href="{base}/posts/{post.slug}">{post.title}</a>
 				</h2>
 				<time class="post-date" datetime={post.date}>
 					{new Date(post.date).toLocaleDateString('ko-KR', {

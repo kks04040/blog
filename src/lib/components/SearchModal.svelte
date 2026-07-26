@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import Fuse from 'fuse.js';
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 
 	export let posts: Array<{
 		slug: string;
@@ -51,7 +52,7 @@
 	function selectResult(slug: string) {
 		isOpen = false;
 		searchQuery = '';
-		goto(`/posts/${slug}`);
+		goto(`${base}/posts/${slug}`);
 	}
 
 	function closeModal() {

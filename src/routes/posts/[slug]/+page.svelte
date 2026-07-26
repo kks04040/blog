@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Post } from '$lib/types';
 	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
 	import Giscus from '$lib/components/Giscus.svelte';
 
 	export let data: Post & { linkMetadata?: Record<string, any> };
@@ -135,7 +136,7 @@
 				<ul>
 					{#each data.relatedPosts as post}
 						<li>
-							<a href="/posts/{post.slug}">{post.title}</a>
+							<a href="{base}/posts/{post.slug}">{post.title}</a>
 						</li>
 					{/each}
 				</ul>

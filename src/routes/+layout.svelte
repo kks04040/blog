@@ -2,6 +2,7 @@
 	import '../app.css';
 	import SearchModal from '$lib/components/SearchModal.svelte';
 	import { page } from '$app/stores';
+	import { base } from '$app/paths';
 
 	export let data;
 
@@ -30,7 +31,7 @@
 
 <header class="site-header">
 	<div class="container">
-		<a href="/" class="site-title">내 블로그</a>
+		<a href="{base}/" class="site-title">내 블로그</a>
 		<div class="header-actions">
 			<button class="search-trigger" on:click={openSearch}>
 				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
