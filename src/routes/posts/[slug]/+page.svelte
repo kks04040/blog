@@ -1,39 +1,63 @@
+/**
+ * 게시글 상세 페이지 컴포넌트
+ * 
+ * 3컬럼 레이아웃으로 게시글을 표시합니다:
+ * - 왼쪽: 목차(TOC) 사이드바
+ * - 가운데: 게시글 본문
+ * - 오른쪽: 관련 글 사이드바
+ * 
+ * 클라이언트 사이드에서:
+ * - 링크 카드 플레이스홀더를 실제 카드로 변환
+ * - 코드 블록에 복사 버튼 추가
+ */
+
 <script lang="ts">
 	import type { Post } from '$lib/types';
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 	import Giscus from '$lib/components/Giscus.svelte';
 
+	// 서버에서 전달받은 게시글 데이터 (HTML 변환된 content 포함)
 	export let data: Post & { linkMetadata?: Record<string, any> };
 
+	/**
+	 * 컴포넌트 마운트 후 클라이언트 사이드 초기화
+	 * - 링크 카드 플레이스홀더를 실제 카드로 변환
+	 * - 코드 블록에 복사 버튼 추가
+	 */
 	onMount(() => {
-		// 링크 카드 플레이스홀더 찾기
+		// 1. 링크 카드 플레이스홀더 처리
+		// 서버 사이드에서 생성된 플레이스홀더를 찾아 실제 카드로 교체
 		const placeholders = document.querySelectorAll('.link-card-placeholder');
 	
 		for (const placeholder of Array.from(placeholders)) {
 			const url = placeholder.getAttribute('data-url');
 			if (!url) continue;
 
-			// 서버에서 가져온 메타데이터 사용
+			// 서버에서 미리 가져온 OG 메타데이터 사용
 			const metadata = data.linkMetadata?.[url] || { title: '', description: '', image: '', favicon: '' };
 		
-			// 링크 카드 생성
+			// 링크 카드 DOM 요소 생성 및 교체
 			const card = createLinkCard(url, metadata);
 			placeholder.replaceWith(card);
 		}
 
-		// 코드 블록에 복사 버튼 추가
+		// 2. 코드 블록에 복사 버튼 추가
+		// Shiki로 하이라이트된 코드 블록(pre.shiki)에 복사 버튼을 동적으로 추가
 		const codeBlocks = document.querySelectorAll('pre.shiki');
 		for (const block of Array.from(codeBlocks)) {
 			const button = document.createElement('button');
 			button.className = 'code-copy-button';
 			button.textContent = '복사';
 		
+			// 복사 버튼 클릭 핸들러
 			button.addEventListener('click', async () => {
 				const code = block.querySelector('code');
 				if (code) {
 					try {
+						// 클립보드에 코드 내용 복사
 						await navigator.clipboard.writeText(code.textContent || '');
+						// 복사 성공 시 피드백 표시
 						button.textContent = '복사됨!';
 						button.classList.add('copied');
 						setTimeout(() => {
@@ -50,6 +74,14 @@
 		}
 	});
 
+	/**
+	 * 링크 카드 DOM 요소 생성 함수
+	 * OG 메타데이터를 사용하여 시각적 링크 카드를 생성합니다.
+	 * 
+	 * @param url - 링크 대상 URL
+	 * @param metadata - OG 메타데이터 (title, description, image, favicon)
+	 * @returns 생성된 링크 카드 DOM 요소
+	 */
 	function createLinkCard(url: string, metadata: any) {
 		const card = document.createElement('div');
 		card.className = 'link-card';
