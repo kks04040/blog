@@ -155,7 +155,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		.use(remarkGfm)            // GitHub Flavored Markdown 지원 (테이블, 취소선 등)
 		.use(remarkFootnotes)      // 각주 지원
 		.use(remarkMath)           // 수학 공식 파싱 ($...$, $$...$$)
-		.use(remarkRehype)         // 마크다운 AST를 HTML AST로 변환
+		.use(remarkRehype, { allowDangerousHtml: true }) // 마크다운 AST를 HTML AST로 변환 (인라인 HTML 보존)
 		.use(rehypeLinkCards)      // URL을 링크 카드로 변환
 		.use(rehypeCodeHighlight)  // 코드 블록 하이라이팅
 		.use(rehypeRaw)            // HTML 태그 처리

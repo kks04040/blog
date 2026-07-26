@@ -500,6 +500,71 @@
 		padding-left: 1.5rem;
 	}
 
+	/* 키보드 키 표시 (<kbd>) - 키캡처럼 보이도록 스타일링 */
+	.post-content :global(kbd) {
+		display: inline-block;
+		font-family: var(--font-mono);
+		font-size: 0.85em;
+		padding: 0.15em 0.5em;
+		background: var(--color-code-bg);
+		border: 1px solid var(--color-border);
+		border-bottom-width: 2px;
+		border-radius: 4px;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+		color: var(--color-text);
+	}
+
+	/* 접기/펼치기 (<details>/<summary>) */
+	.post-content :global(details) {
+		margin: 1.5rem 0;
+		padding: 0.8rem 1rem;
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		background: var(--color-code-bg);
+	}
+
+	.post-content :global(summary) {
+		cursor: pointer;
+		font-weight: 600;
+		list-style: none;
+		outline: none;
+	}
+
+	.post-content :global(summary::-webkit-details-marker) {
+		display: none;
+	}
+
+	.post-content :global(summary::before) {
+		content: "▶";
+		display: inline-block;
+		margin-right: 0.5em;
+		font-size: 0.75em;
+		transition: transform 0.2s;
+	}
+
+	.post-content :global(details[open] summary::before) {
+		transform: rotate(90deg);
+	}
+
+	.post-content :global(details > *:not(summary)) {
+		margin-top: 0.8rem;
+	}
+
+	/* 정의 목록 (<dl>/<dt>/<dd>) */
+	.post-content :global(dl) {
+		margin: 1.5rem 0;
+	}
+
+	.post-content :global(dt) {
+		font-weight: 600;
+		margin-top: 1rem;
+	}
+
+	.post-content :global(dd) {
+		margin: 0.3rem 0 0 1.5rem;
+		color: var(--color-text-light);
+	}
+
 	.post-content :global(section.footnotes li) {
 		margin-bottom: 0.5rem;
 	}
